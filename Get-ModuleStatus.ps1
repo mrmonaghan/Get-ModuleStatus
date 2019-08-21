@@ -2,16 +2,28 @@
  [CmdletBinding()]
 
     param(
-        [Parameter(Mandatory = $false)]
+        [Parameter(
+                Mandatory = $false,
+                DontShow
+                )]
         [string] $VerbosePreference = 'Continue',
-        
-        [Parameter(Mandatory = $false)]
+
+        [Parameter(
+                Mandatory = $false,
+                DontShow
+                )]
         [string]$LogFileName = 'Get-ModuleStatus.txt',
 
-        [Parameter(Mandatory = $false)]
+        [Parameter(
+                Mandatory = $false,
+                DontShow
+                )]
         [string]$LogFileDirectory = 'C:\Users\' + $env:username + '\Documents\PSLogs',
-        
-        [Parameter(Mandatory = $false)]
+
+        [Parameter(
+                Mandatory = $false,
+                DontShow
+                )]
         [string]$Date = (Get-Date),
 
         [Parameter(Mandatory = $True)]
@@ -31,7 +43,7 @@
 
     process {
         Start-Transcript -Path $LogFileDirectory\$LogFileName -Append
-        Write-Verbose "------ $date run of script beginning... ------"   
+        Write-Verbose "------ $date run of script beginning... ------"
         if (!(Get-InstalledModule $ModuleName -ErrorAction Ignore)) {
             Write-Verbose "$ModuleName is not installed on $env:COMPUTERNAME. Would you like to proceed with installation?"
             Install-Module -Name $ModuleName -AllowClobber -Force -Confirm
